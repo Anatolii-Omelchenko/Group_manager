@@ -56,6 +56,12 @@ public class MyController {
         return "group_add_page";
     }
 
+    @GetMapping("/group_delete_page")
+    public String groupDeletePage(Model model) {
+        model.addAttribute("groups", contactService.findGroups());
+        return "group_delete_page";
+    }
+
     @GetMapping("/group/{id}")
     public String listGroup(
             @PathVariable(value = "id") long groupId,
@@ -91,6 +97,12 @@ public class MyController {
             contactService.deleteContacts(toDelete);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/group/delete")
+    public String groupDelete(@RequestParam(value = "group") long groupId){
+        contactService.deleteGroup(groupId);
+        return "redirect:/";
     }
 
     @PostMapping(value="/contact/add")

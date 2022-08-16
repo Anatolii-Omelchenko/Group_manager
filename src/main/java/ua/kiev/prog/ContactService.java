@@ -23,6 +23,11 @@ public class ContactService {
     }
 
     @Transactional
+    public void deleteGroup(Long id){
+        groupRepository.deleteById(id);
+    }
+
+    @Transactional
     public void addGroup(Group group) {
         groupRepository.save(group);
     }
